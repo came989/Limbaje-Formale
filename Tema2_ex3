@@ -1,5 +1,4 @@
 def generate_strings(grammar, start_symbol, max_length):
-    # Funcție pentru derivarea șirurilor
     def derive(symbol, current_string):
         if len(current_string) == max_length:
             print(current_string)
@@ -12,16 +11,13 @@ def generate_strings(grammar, start_symbol, max_length):
             for derived_symbol in production:
                 derive(derived_symbol, current_string + derived_symbol)
 
-    # Derivăm șirurile începând cu simbolul de start
     derive(start_symbol, '')
 
-# Definim gramatica pentru a și b
 grammar = {
     'S': ['AB'],
     'A': ['aA', ''],
     'B': ['bB', '']
 }
 
-# Generăm și afișăm toate șirurile de lungime maximă formate din a și b
 print("Șirurile de lungime maximă formate din literele 'a' și 'b':")
 generate_strings(grammar, 'S', 5)
