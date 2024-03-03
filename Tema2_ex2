@@ -4,7 +4,7 @@
 using namespace std;
 
 int main() {
-    int iteratii = 3;
+    int lungimeMaxima = 3;
 
     cout << "Iteratia 1:" << endl;
     cout << "aa" << endl;
@@ -12,7 +12,7 @@ int main() {
     cout << "a" << endl;
     cout << "b" << endl;
 
-    for (int i = 2; i <= iteratii; ++i) {
+    for (int i = 2; i <= lungimeMaxima; ++i) {
         cout << "Iteratia " << i << ":" << endl;
         string s1 = string(i, 'a');
         string s2 = string(i, 'b');
