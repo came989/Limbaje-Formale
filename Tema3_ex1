@@ -1,39 +1,60 @@
-class CoffeeMachine:
-    def __init__(self):
-        self.alphabet = {'C', 'T', 'A', 'H', 'OK'}
-        self.states = {'q0', 'q1', 'q2', 'q3', 'q4'}
-        self.current_state = 'q0'  # Starea inițială
+#include <iostream>
+#include <unordered_map>
+#include <string>
 
-        
-        self.transition_function = {
-            ('q0', 'C'): 'q1',
-            ('q0', 'T'): 'q2',
-            ('q0', 'A'): 'q3',
-            ('q0', 'H'): 'q4',
-            ('q1', 'OK'): 'q4',
-            ('q2', 'OK'): 'q4',
-            ('q3', 'OK'): 'q4',
-            ('q4', 'OK'): 'q0'
+using namespace std;
+
+class Automat {
+private:
+    unordered_map<char, string> tranzitie;
+    string stareCurenta;
+    const string stareFinala = "q4";
+
+public:
+    Automat() {
+        tranzitie = {
+            {'C', "q1"},
+            {'T', "q2"},
+            {'A', "q3"},
+            {'H', "q4"},
+            {'O', "q0"}
+        };
+        stareCurenta = "q0";
+    }
+
+    void selecteazaBautura(char bautura) {
+        if (tranzitie.find(bautura) != tranzitie.end()) {
+            stareCurenta = tranzitie[bautura];
+            cout << "Bautura selectata: " << bautura << ", stare curenta: " << stareCurenta << endl;
+            if (stareCurenta == stareFinala) {
+                cout << "Bautura este gata!" << endl;
+            }
+        } else {
+            cout << "Selectie invalida!" << endl;
         }
+    }
 
-    def process_input(self, input_symbol):
-        if input_symbol not in self.alphabet:
-            print("Intrare invalidă!")
-            return
+    void confirmaSelectie() {
+        if (stareCurenta != "q0") {
+            stareCurenta = "q0";
+            cout << "Selectie confirmata, revenire la starea initiala: q0" << endl;
+        } else {
+            cout << "Nu exista o selectie valida pentru confirmare!" << endl;
+        }
+    }
+};
 
-        
-        if (self.current_state, input_symbol) not in self.transition_function:
-            print("Tranziție invalidă!")
-            return
+int main() {
+    Automat automat;
 
-        
-        self.current_state = self.transition_function[(self.current_state, input_symbol)]
-        print(f"Stare curentă: {self.current_state}")
+    automat.selecteazaBautura('C');
+    automat.confirmaSelectie();
+    automat.selecteazaBautura('T');
+    automat.confirmaSelectie();
+    automat.selecteazaBautura('A');
+    automat.confirmaSelectie();
+    automat.selecteazaBautura('H');
+    automat.confirmaSelectie();
 
-
-coffee_machine = CoffeeMachine()
-
-
-while coffee_machine.current_state != 'q4':  # Până când ajungem în starea finală
-    input_symbol = input("Introduceți simbolul de intrare (C, T, A, H, OK): ")
-    coffee_machine.process_input(input_symbol)
+    return 0;
+}
