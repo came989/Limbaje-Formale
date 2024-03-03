@@ -4,57 +4,50 @@
 
 using namespace std;
 
-class Automat {
-private:
-    unordered_map<char, string> tranzitie;
-    string stareCurenta;
+int main() {
+    unordered_map<char, string> tranzitie = {
+        {'C', "q1"},
+        {'T', "q2"},
+        {'A', "q3"},
+        {'H', "q4"},
+        {'O', "q0"}
+    };
+
+    string stareCurenta = "q0";
     const string stareFinala = "q4";
 
-public:
-    Automat() {
-        tranzitie = {
-            {'C', "q1"},
-            {'T', "q2"},
-            {'A', "q3"},
-            {'H', "q4"},
-            {'O', "q0"}
-        };
-        stareCurenta = "q0";
-    }
+    char bautura;
+    cout << "Selectati o bautura (C - cafea, T - ceai, A - cappuccino, H - ciocolata calda): ";
+    cin >> bautura;
 
-    void selecteazaBautura(char bautura) {
-        if (tranzitie.find(bautura) != tranzitie.end()) {
+    switch (bautura) {
+        case 'C':
+        case 'T':
+        case 'A':
+        case 'H':
             stareCurenta = tranzitie[bautura];
             cout << "Bautura selectata: " << bautura << ", stare curenta: " << stareCurenta << endl;
             if (stareCurenta == stareFinala) {
                 cout << "Bautura este gata!" << endl;
             }
-        } else {
+            break;
+        default:
             cout << "Selectie invalida!" << endl;
-        }
+            break;
     }
 
-    void confirmaSelectie() {
-        if (stareCurenta != "q0") {
+    if (stareCurenta == stareFinala) {
+        cout << "Confirmati selectia apasand butonul OK." << endl;
+        char confirmare;
+        cout << "Apasati OK pentru a confirma selectia: ";
+        cin >> confirmare;
+        if (confirmare == 'O') {
             stareCurenta = "q0";
             cout << "Selectie confirmata, revenire la starea initiala: q0" << endl;
         } else {
-            cout << "Nu exista o selectie valida pentru confirmare!" << endl;
+            cout << "Selectie neconfirmata!" << endl;
         }
     }
-};
-
-int main() {
-    Automat automat;
-
-    automat.selecteazaBautura('C');
-    automat.confirmaSelectie();
-    automat.selecteazaBautura('T');
-    automat.confirmaSelectie();
-    automat.selecteazaBautura('A');
-    automat.confirmaSelectie();
-    automat.selecteazaBautura('H');
-    automat.confirmaSelectie();
 
     return 0;
 }
