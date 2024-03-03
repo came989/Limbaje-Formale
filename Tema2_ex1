@@ -15,7 +15,6 @@ def generate_palindromes(length):
     backtrack('')
     return palindromes
 
-# Afișăm palindroamele pentru lungimile de la 1 la 5
 for length in range(1, 6):
     print(f"Palindroame de lungime {length}:")
     palindromes = generate_palindromes(length)
