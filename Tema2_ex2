@@ -1,24 +1,26 @@
-def generate_strings(iterations):
-    productions = {
-        'S': ['aSa', 'bSb', 'a', 'b', '']
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int main() {
+    int iteratii = 3;
+
+    cout << "Iteratia 1:" << endl;
+    cout << "aa" << endl;
+    cout << "bb" << endl;
+    cout << "a" << endl;
+    cout << "b" << endl;
+
+    for (int i = 2; i <= iteratii; ++i) {
+        cout << "Iteratia " << i << ":" << endl;
+        string s1 = string(i, 'a');
+        string s2 = string(i, 'b');
+        cout << s1 + s1 << endl;
+        cout << s2 + s1 << endl;
+        cout << s1 + s2 << endl;
+        cout << s2 + s2 << endl;
     }
 
-    def derive(symbol, depth):
-        if depth == 0:
-            return [symbol]
-
-        result = []
-        for production in productions[symbol]:
-            for derived_symbol in production:
-                result.extend(derive(derived_symbol, depth - 1))
-        return result
-
-    for i in range(1, iterations + 1):
-        print(f"Iterația {i}:")
-        strings = derive('S', i)
-        for string in strings:
-            if string:
-                print(string)
-        print()
-
-generate_strings(3)
+    return 0;
+}
