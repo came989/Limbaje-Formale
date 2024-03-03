@@ -1,23 +1,57 @@
-def generate_strings(grammar, start_symbol, max_length):
-    def derive(symbol, current_string):
-        if len(current_string) == max_length:
-            print(current_string)
-            return
+#include <iostream>
+#include <string>
 
-        if symbol not in grammar:
-            return
+using namespace std;
 
-        for production in grammar[symbol]:
-            for derived_symbol in production:
-                derive(derived_symbol, current_string + derived_symbol)
+int main() {
+    cout << "Gramatica 1:" << endl;
+    
+    int lungime_maxima = 10; // putem seta orice lungime dorim
 
-    derive(start_symbol, '')
+    for (int i = 0; i <= lungime_maxima; ++i) {
+        string s;
+        for (int j = 0; j < i; ++j) {
+            s += 'a';
+        }
+        for (int j = 0; j < i; ++j) {
+            s += 'b';
+        }
+        cout << s << endl;
+    }
 
-grammar = {
-    'S': ['AB'],
-    'A': ['aA', ''],
-    'B': ['bB', '']
+    return 0;
 }
 
-print("Șirurile de lungime maximă formate din literele 'a' și 'b':")
-generate_strings(grammar, 'S', 5)
+b)
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int main() {
+    cout << "Gramatica 2:" << endl;
+    
+    int lungime_maxima = 10; // putem seta orice lungime dorim
+
+    for (int i = 0; i <= lungime_maxima; ++i) {
+        string s;
+        for (int j = 0; j < i; ++j) {
+            s += '0';
+        }
+        for (int j = 0; j < i; ++j) {
+            s += '1';
+        }
+        for (int j = 0; j < i; ++j) {
+            s += '2';
+        }
+        for (int j = 0; j < i; ++j) {
+            s += '3';
+        }
+        for (int j = 0; j < i; ++j) {
+            s += '4';
+        }
+        cout << s << endl;
+    }
+
+    return 0;
+}
