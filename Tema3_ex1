@@ -1,11 +1,10 @@
 class CoffeeMachine:
     def __init__(self):
-        # Definim alfabetul de intrare și stările
         self.alphabet = {'C', 'T', 'A', 'H', 'OK'}
         self.states = {'q0', 'q1', 'q2', 'q3', 'q4'}
         self.current_state = 'q0'  # Starea inițială
 
-        # Definim funcția de tranziție
+        
         self.transition_function = {
             ('q0', 'C'): 'q1',
             ('q0', 'T'): 'q2',
@@ -18,24 +17,23 @@ class CoffeeMachine:
         }
 
     def process_input(self, input_symbol):
-        # Verificăm dacă simbolul de intrare este valid
         if input_symbol not in self.alphabet:
             print("Intrare invalidă!")
             return
 
-        # Verificăm dacă tranziția este posibilă
+        
         if (self.current_state, input_symbol) not in self.transition_function:
             print("Tranziție invalidă!")
             return
 
-        # Efectuăm tranziția
+        
         self.current_state = self.transition_function[(self.current_state, input_symbol)]
         print(f"Stare curentă: {self.current_state}")
 
-# Creăm un automat de cafea
+
 coffee_machine = CoffeeMachine()
 
-# Simulăm funcționarea automatului cu intrări date de utilizator
+
 while coffee_machine.current_state != 'q4':  # Până când ajungem în starea finală
     input_symbol = input("Introduceți simbolul de intrare (C, T, A, H, OK): ")
     coffee_machine.process_input(input_symbol)
