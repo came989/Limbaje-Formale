@@ -1,0 +1,58 @@
+#include <iostream>
+#include <map>
+#include <string>
+
+using namespace std;
+
+class FiniteAutomaton {
+private:
+    map<char, map<char, char>> transitions;
+    map<char, bool> final_states;
+    char current_state;
+
+public:
+    FiniteAutomaton() {
+        // Definirea tranzițiilor
+        transitions['A']['0'] = 'B';
+        transitions['A']['1'] = 'A';
+        transitions['B']['0'] = 'A';
+        transitions['B']['1'] = 'B';
+
+        // Definirea stărilor finale
+        final_states['A'] = true;
+        final_states['B'] = false;  // Starea 'B' nu este finală
+
+        // Setarea stării inițiale
+        current_state = 'A';
+    }
+
+    void process_input_sequence(const string& sequence) {
+        for (char symbol : sequence) {
+            if (transitions[current_state].find(symbol) != transitions[current_state].end()) {
+                current_state = transitions[current_state][symbol];
+            }
+            else {
+                cout << "Invalid input sequence" << endl;
+                return;
+            }
+        }
+
+        if (final_states[current_state]) {
+            cout << "Final state is " << current_state << endl;
+        }
+        else {
+            cout << "Final state is not in final states" << endl;
+        }
+    }
+};
+
+int main() {
+    FiniteAutomaton automaton;
+
+    // Testare cu secvențe de intrare
+    automaton.process_input_sequence("010");
+    automaton.process_input_sequence("110");
+    automaton.process_input_sequence("1001");
+
+    return 0;
+}
