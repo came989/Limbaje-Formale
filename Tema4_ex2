@@ -1,0 +1,53 @@
+#include <iostream>
+#include <unordered_map>
+#include <vector>
+
+using namespace std;
+
+class ParkingAutomaton {
+private:
+    int total_spaces;
+    int available_spaces;
+
+public:
+    ParkingAutomaton(int total) : total_spaces(total), available_spaces(total) {}
+
+    void park() {
+        if (available_spaces > 0) {
+            available_spaces--;
+            cout << "Car parked successfully. Available spaces: " << available_spaces << endl;
+        } else {
+            cout << "Parking is full. Cannot park car." << endl;
+        }
+    }
+
+    void leave() {
+        if (available_spaces < total_spaces) {
+            available_spaces++;
+            cout << "Car left successfully. Available spaces: " << available_spaces << endl;
+        } else {
+            cout << "Parking is empty. No cars to leave." << endl;
+        }
+    }
+
+    void checkStatus() {
+        cout << "Total spaces: " << total_spaces << ", Available spaces: " << available_spaces << endl;
+    }
+};
+
+int main() {
+    // Creăm un automat cu 10 locuri de parcare
+    ParkingAutomaton parking(10);
+
+    // Testăm operațiunile
+    parking.checkStatus();
+    parking.park();
+    parking.leave();
+    parking.park();
+    parking.park();
+    parking.checkStatus();
+    parking.leave();
+    parking.leave();
+
+    return 0;
+}
