@@ -1,31 +1,25 @@
-class FiniteAutomaton:
-    def __init__(self):
-        self.current_state = 'A'
+def automat_finit(stare_initiala, secventa_intrare):
+  stari = {"A", "B"}
+  simboluri = {"0", "1"}
+  tranzitii = {
+      ("A", "0"): "B",
+      ("A", "1"): "A",
+      ("B", "0"): "A",
+      ("B", "1"): "B",
+  }
 
-    def transition(self, symbol):
-        if self.current_state == 'A':
-            if symbol == '0':
-                self.current_state = 'B'
-        elif self.current_state == 'B':
-            if symbol == '1':
-                self.current_state = 'B'
-            elif symbol == '0':
-                self.current_state = 'A'
+  stare_curenta = stare_initiala
+  for simbol in secventa_intrare:
+    if simbol not in simboluri:
+      raise ValueError(f"Simbolul invalid: {simbol}")
+    stare_curenta = tranzitii[(stare_curenta, simbol)]
 
-    def get_final_state(self):
-        return self.current_state
+  return stare_curenta
 
-
-def simulate(input_sequence):
-    automaton = FiniteAutomaton()
-    for symbol in input_sequence:
-        automaton.transition(symbol)
-    return automaton.get_final_state()
-
-
-# Test the automaton with given input sequences
-sequences = ["010", "110", "1001"]
-for sequence in sequences:
-    final_state = simulate(sequence)
-    print(f"Final state for sequence '{sequence}': {final_state}")
-}
+# Testarea funcției
+stare_initiala = "A"
+secvente_intrare = ["010", "110", "1001"]
+for secventa in secvente_intrare:
+  stare_finala = automat_finit(stare_initiala, secventa)
+  print(f"Secvență: {secventa}")
+  print(f"Starea finală: {stare_finala}")
