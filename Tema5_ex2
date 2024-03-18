@@ -1,0 +1,34 @@
+class MealyMachine:
+    def __init__(self):
+        self.state = 'Q1'
+
+    def transition(self, input_signal):
+        if self.state == 'Q1':
+            if input_signal == 'X':
+                self.state = 'Q1'
+                return 'O1'
+            elif input_signal == 'Y':
+                self.state = 'Q2'
+                return 'O2'
+        elif self.state == 'Q2':
+            if input_signal == 'X':
+                self.state = 'Q1'
+                return 'O2'
+            elif input_signal == 'Y':
+                self.state = 'Q2'
+                return 'O1'
+
+    def get_current_state(self):
+        return self.state
+
+
+# Test the Mealy machine
+mealy_machine = MealyMachine()
+
+# Test transitions
+transitions = [('X', 'O1'), ('Y', 'O2'), ('X', 'O2'), ('Y', 'O1')]
+
+for input_signal, expected_output in transitions:
+    output = mealy_machine.transition(input_signal)
+    current_state = mealy_machine.get_current_state()
+    print(f"Input: {input_signal}, Current State: {current_state}, Output: {output}, Expected Output: {expected_output}")
