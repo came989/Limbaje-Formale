@@ -1,35 +1,33 @@
 
-class MooreMachine:
-    def __init__(self):
-        self.state = 'S1'
+class MasinaMoore:
+  def __init__(self):
+    self.stare_curenta = "S1"
 
-    def transition(self, input_signal):
-        if self.state == 'S1':
-            if input_signal == 'A':
-                self.state = 'S1'
-                return 'O1'
-            elif input_signal == 'B':
-                self.state = 'S2'
-                return 'O1'
-        elif self.state == 'S2':
-            if input_signal == 'A':
-                self.state = 'S1'
-                return 'O2'
-            elif input_signal == 'B':
-                self.state = 'S2'
-                return 'O2'
+  def tranzitie(self, intrare):
+    stari = {"S1", "S2"}
+    intrari = {"A", "B"}
+    iesiri = {"O1", "O2"}
+    tranzitii = {
+        ("S1", "A"): ("S1", "O1"),
+        ("S1", "B"): ("S2", "O2"),
+        ("S2", "A"): ("S1", "O1"),
+        ("S2", "B"): ("S2", "O2"),
+    }
 
-    def get_current_state(self):
-        return self.state
+    if intrare not in intrari:
+      raise ValueError(f"Simbol de intrare invalid: {intrare}")
 
+    stare_urmatoare, iesire = tranzitii[(self.stare_curenta, intrare)]
+    self.stare_curenta = stare_urmatoare
+    return iesire
 
-# Test the Moore machine
-moore_machine = MooreMachine()
+# Testarea funcției
+masina = MasinaMoore()
 
-# Test transitions
-transitions = [('A', 'O1'), ('B', 'O1'), ('A', 'O2'), ('B', 'O2')]
-
-for input_signal, expected_output in transitions:
-    output = moore_machine.transition(input_signal)
-    current_state = moore_machine.get_current_state()
-    print(f"Input: {input_signal}, Current State: {current_state}, Output: {output}, Expected Output: {expected_output}")
+# Simulare tranziții
+for intrare in ["A", "B"]:
+  print(f"Intrare: {intrare}")
+  print(f"Stare: {masina.stare_curenta}")
+  iesire = masina.tranzitie(intrare)
+  print(f"Ieșire: {iesire}")
+  print()
