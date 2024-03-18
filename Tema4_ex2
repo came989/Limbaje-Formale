@@ -21,11 +21,10 @@ class ParkingAutomaton:
         return self.available_spaces
 
 
-# Test the automaton
 parking = ParkingAutomaton(5)
 print("Available spaces initially:", parking.get_available_spaces())
 
-# Test parking
+
 if parking.park_car():
     print("Car parked successfully.")
 else:
