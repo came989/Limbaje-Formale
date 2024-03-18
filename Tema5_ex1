@@ -1,1 +1,35 @@
 
+class MooreMachine:
+    def __init__(self):
+        self.state = 'S1'
+
+    def transition(self, input_signal):
+        if self.state == 'S1':
+            if input_signal == 'A':
+                self.state = 'S1'
+                return 'O1'
+            elif input_signal == 'B':
+                self.state = 'S2'
+                return 'O1'
+        elif self.state == 'S2':
+            if input_signal == 'A':
+                self.state = 'S1'
+                return 'O2'
+            elif input_signal == 'B':
+                self.state = 'S2'
+                return 'O2'
+
+    def get_current_state(self):
+        return self.state
+
+
+# Test the Moore machine
+moore_machine = MooreMachine()
+
+# Test transitions
+transitions = [('A', 'O1'), ('B', 'O1'), ('A', 'O2'), ('B', 'O2')]
+
+for input_signal, expected_output in transitions:
+    output = moore_machine.transition(input_signal)
+    current_state = moore_machine.get_current_state()
+    print(f"Input: {input_signal}, Current State: {current_state}, Output: {output}, Expected Output: {expected_output}")
