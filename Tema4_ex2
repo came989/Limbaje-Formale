@@ -32,7 +32,6 @@ else:
 
 print("Available spaces after parking:", parking.get_available_spaces())
 
-# Test leaving parking
 if parking.leave_parking():
     print("Car left parking successfully.")
 else:
