@@ -1,0 +1,31 @@
+import re
+
+def match_regex1(string):
+    regex1 = r"(1+00*1)+(1+00*1)(0+10*1)(0+10*1)"
+    return re.fullmatch(regex1, string) is not None
+
+def match_regex2(string):
+    regex2 = r"0*1(0+10*1)*"
+    return re.fullmatch(regex2, string) is not None
+
+# Test strings
+test_strings = [
+    "1001",     # Matches both
+    "100",      # Matches regex1 only
+    "011011",   # Matches regex1 only
+    "0101",     # Matches both
+    "1101",     # Matches both
+    "01",       # Matches regex2 only
+    "111",      # Doesn't match any
+]
+
+# Test the strings
+for string in test_strings:
+    if match_regex1(string) and match_regex2(string):
+        print(f"{string}: Matches both")
+    elif match_regex1(string):
+        print(f"{string}: Matches regex1 only")
+    elif match_regex2(string):
+        print(f"{string}: Matches regex2 only")
+    else:
+        print(f"{string}: Doesn't match any")
