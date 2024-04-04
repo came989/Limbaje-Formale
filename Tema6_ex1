@@ -6,7 +6,7 @@
 ef concatenate(expression1, expression2):
     return '(' + expression1 + expression2 + ')'
 
-def kleene_star(expression):
+def expression(expression):
     return '(' + expression + ')*'
 
 def prove_identity(expression1, expression2):
