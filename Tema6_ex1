@@ -10,7 +10,7 @@ def expression(expression):
     return '(' + expression + ')*'
 
 def prove_identity(expression1, expression2):
-    step1 = kleene_star(expression1)
+    step1 = expression(expression1)
     step2 = concatenate(expression2, step1)
     return step2
 
