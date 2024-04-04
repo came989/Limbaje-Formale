@@ -3,23 +3,34 @@
 =(1+00*1)[epsilon+(0+10*1)*(0+10*1)]    formula: epsilon+R*R=R* si   epsilon ori R = R
 =(1+00*1)(0+10*1)*
 
-def validate_postal_code(postal_code):
-    # Ensure the postal code is not empty
-    if not postal_code:
-        return False
-    
-    # Check the first character
-    if postal_code[0] != '1' and postal_code[:3] != '000':
-        return False
-    
-    # Check the remaining characters
-    for char in postal_code[1:]:
-        if char not in '01':
-            return False
-    
-    return True
+ef concatenate(expression1, expression2):
+    return '(' + expression1 + expression2 + ')'
 
-# Test cases
-print(validate_postal_code("12345"))  # Example valid postal code
-print(validate_postal_code("00000"))  # Example valid postal code
-print(validate_postal_code("90210"))  # Example invalid postal code
+def kleene_star(expression):
+    return '(' + expression + ')*'
+
+def prove_identity(expression1, expression2):
+    step1 = kleene_star(expression1)
+    step2 = concatenate(expression2, step1)
+    return step2
+
+# Given expressions
+expression1 = '1+00*1'
+expression2 = '(1+00*1)(0+10*1)*(0+10*1)'
+
+# Proving the identity
+proved_expression = prove_identity(expression1, expression2)
+
+# Expected expression after simplification
+expected_expression = '0*1(0+10*1)*'
+
+print("Given expression 1:", expression1)
+print("Given expression 2:", expression2)
+print("Expected expression after simplification:", expected_expression)
+print("Proved expression:", proved_expression)
+
+# Checking if proved expression matches expected expression
+if proved_expression == expected_expression:
+    print("The given expression identity is proved.")
+else:
+    print("The given expression identity is not proved.")
