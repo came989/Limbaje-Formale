@@ -1,0 +1,31 @@
+class Destination:
+    def __init__(self, name, activities, required_budget, preferred_weather):
+        self.name = name
+        self.activities = activities
+        self.required_budget = required_budget
+        self.preferred_weather = preferred_weather
+
+    def display_information(self):
+        print("Destinatia:", self.name)
+        print("Activitati:", ", ".join(self.activities))
+        print("Buget necesar:", self.required_budget)
+        print("Vreme preferata:", self.preferred_weather)
+        print("-----------------------------")
+
+destinations = [
+    Destination("La mare", ["Inot", "Plaja"], 1500, "soare"),
+    Destination("La munte", ["drumeții", "Liniste"], 1000, "răcoros"),
+    Destination("Oras turistic", ["muzee", "monumente"], 1200, "moderat")
+]
+
+budget = float(input("Introduceti bugetul disponibil (in EUR): "))
+preferred_weather = input("Introduceti vremea preferata: ")
+
+matching_destinations = [destination for destination in destinations if destination.preferred_weather == preferred_weather]
+
+if matching_destinations and budget >= sum(destination.required_budget for destination in matching_destinations):
+    print(f"Exista {len(matching_destinations)} destinatii disponibile care se potrivesc criteriilor:")
+    for destination in matching_destinations:
+        destination.display_information()
+else:
+    print("Nu exista destinații disponibile care să se potrivească criteriilor sau bugetul nu este suficient pentru toate destinațiile.")  
